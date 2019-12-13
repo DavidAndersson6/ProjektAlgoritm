@@ -10,10 +10,10 @@ struct Data
 {
 	double temp;
 	double mold;
-	int fukt;
-	string dag;
-	string inUt;
-	Data() : temp(0), fukt(0), dag("0"), inUt("0"), mold(0) {}	// Puts varible value at 0 
+	int hum;	
+	string day;
+	string inOut;
+	Data() : temp(0), hum(0), day("0"), inOut("0"), mold(0) {}	// Puts varible value at 0 
 };
 
 void winter(vector <Data>& dv, int n)			// Function for calculating and printing out the first date for meterological winter
@@ -26,7 +26,7 @@ void winter(vector <Data>& dv, int n)			// Function for calculating and printing
 		{																													// The variable foundwinter turns true and the program prints out the first day where the if statement is true
 
 			foundWinter = true;
-			cout << dv[i].dag << endl;
+			cout << dv[i].day << endl;
 			break;
 		}
 	}
@@ -45,7 +45,7 @@ void fall(vector <Data>& dv, int n)	   // Function for calculating and printing 
 		{
 			if (dv[i].temp >= dv[i + 1].temp && dv[i + 1].temp >= dv[i + 2].temp && dv[i + 2].temp >= dv[i + 3].temp && dv[i + 3].temp >= dv[i + 4].temp)	// Also if the temperature the next day goes down from the previous day the 4 coming days
 			{
-				cout << dv[i].dag << endl;				// print out the day where both these statements are true
+				cout << dv[i].day << endl;				// print out the day where both these statements are true
 				break;
 			}
 		}
@@ -59,14 +59,14 @@ void mold(vector <Data>& dv, int n)			//Function to calculate mold risk
 	double humLimit = 78;			// Set value of humLimit to 78
 	for (int i = 0; i < n; i++)
 	{
-		if (dv[i].temp >= 15 && dv[i].temp < 50 && dv[i].fukt >= humLimit)	// If temperature is between 15 and 50 and humidity is exactly or above 78
+		if (dv[i].temp >= 15 && dv[i].temp < 50 && dv[i].hum >= humLimit)	// If temperature is between 15 and 50 and humidity is exactly or above 78
 		{
-			dv[i].mold = (dv[i].fukt - humLimit) / 0.22;					// Subtract 78 which is the humidity limit from the humidity of the day where the above if statement is true
+			dv[i].mold = (dv[i].hum - humLimit) / 0.22;					// Subtract 78 which is the humidity limit from the humidity of the day where the above if statement is true
 																			// Then divide that number by 0.22 to get a value on a 100 grade scale 
 		}
-		else if (dv[i].temp >= 0 && dv[i].temp < 15 && dv[i].fukt >= humLimit)	// If the temperature is between 0 and 15 degrees and humidity is exactly or above 78
+		else if (dv[i].temp >= 0 && dv[i].temp < 15 && dv[i].hum >= humLimit)	// If the temperature is between 0 and 15 degrees and humidity is exactly or above 78
 		{
-			dv[i].mold = ((dv[i].fukt - humLimit) * (dv[i].temp / 15)) / 0.22;	// Subtract humLimit from the humidity again and then multiply that by temperature divided by 15 which is the temperature limit
+			dv[i].mold = ((dv[i].hum - humLimit) * (dv[i].temp / 15)) / 0.22;	// Subtract humLimit from the humidity again and then multiply that by temperature divided by 15 which is the temperature limit
 																				// After that, divide the result by 0.22 
 		}
 
@@ -93,12 +93,12 @@ void bubbleSortTemp(vector <Data>& dv, int n)
 	for (i = 0; i < n - 1; i++)					// Start with a for loop to include all the 130 days in the list
 	{
 
-			// Last i elements are already in place  
-		for (int j = 0; j < n - i - 1; j++)
+			
+		for (int j = 0; j < n - i - 1; j++)		// Goes through all unsorted values because the following values are already sorted.
 		{
-			if (dv[j].temp > dv[j + 1].temp)
+			if (dv[j].temp > dv[j + 1].temp)		
 			{
-				swap(&dv[j], &dv[j + 1]);
+				swap(&dv[j], &dv[j + 1]);	
 			}
 		}
 	}
@@ -113,7 +113,7 @@ void bubbleSortFukt(vector <Data>& dv, int n)
 		// Last i elements are already in place  
 		for (int j = 0; j < n - i - 1; j++)
 		{
-			if (dv[j].fukt > dv[j + 1].fukt)
+			if (dv[j].hum > dv[j + 1].hum)
 			{
 				swap(&dv[j], &dv[j + 1]);
 			}
@@ -145,7 +145,7 @@ void printVectorTemp(vector <Data> dv, int n)
 
 	int i;
 	for (i = n - 1; i > n - 6; i--)
-		cout << dv[i].dag << " " << dv[i].temp << " " << dv[i].inUt << " " << endl;
+		cout << dv[i].day << " " << dv[i].temp << " " << dv[i].inOut << " " << endl;
 
 }
 void printVectorFukt(vector <Data> dv, int n)
@@ -153,7 +153,7 @@ void printVectorFukt(vector <Data> dv, int n)
 
 	int i;
 	for (i = 0; i < 5; i++)
-		cout << dv[i].dag << " " << dv[i].fukt << " " << dv[i].inUt << " " << endl;
+		cout << dv[i].day << " " << dv[i].hum << " " << dv[i].inOut << " " << endl;
 
 }
 void printVectorMold(vector <Data> dv, int n)
@@ -161,7 +161,7 @@ void printVectorMold(vector <Data> dv, int n)
 
 	int i;
 	for (i = 0; i < n; i++)
-		cout << dv[i].dag << " \t Temperature:  " << dv[i].temp << " \t Humidity:  " << dv[i].fukt << " \t Mold index: " << dv[i].mold << endl;
+		cout << dv[i].day << " \t Temperature:  " << dv[i].temp << " \t Humidity:  " << dv[i].hum << " \t Mold index: " << dv[i].mold << endl;
 
 }
 
@@ -170,11 +170,11 @@ void printVectorMold(vector <Data> dv, int n)
 int main()
 {
 
-	string day, time, inOut, temperature, humidity;       // Deklarerar variabler
+	string day, time, inOut, temperature, humidity;       
 
 
-	ifstream file("tempdata4.txt");              // Läser in textfilen
-	if (file.is_open())                      // Om det går att öpnna filen
+	ifstream file("tempdata4.txt");              //Read in textfile
+	if (file.is_open())                      // If the file can be opened, do this
 	{
 
 
@@ -186,39 +186,39 @@ int main()
 		long int outCount = 0;				// Sätter värdet av outCount till 0
 		long int count = 0;					 // Sätter värdet av count till 0
 
-		vector <Data> dvIn;				// skapa en vector för alla värden jag vill ha utomhus
-		vector <Data> dvOut;			// skapa en vector för alla värden jag vill ha inomhus
+		vector <Data> dvIn;				// Create a vector for all values I want indoors
+		vector <Data> dvOut;			// Create a vector for all values I want outdoors
 
-		Data i;						// Deklarera variabler för inne och ute i min vector
+		Data i;						// Declare variables for in and out
 		Data u;
 
 
 
-		while (!file.eof())				// Kör detta medans filen inte är slut
+		while (!file.eof())				// Run this until the end of the file
 		{
 
-			getline(file, day, ' ');		// Läser in värden av datum etc från textfilen in i variabler
+			getline(file, day, ' ');		// Get values from file and set the values to variables
 			getline(file, time, ',');
 			getline(file, inOut, ',');
 			getline(file, temperature, ',');
 			getline(file, humidity);
 
-			if (day == checkDate)				// Om dag = checkDate som just nu är 0
+			if (day == checkDate)				// If day = Checkdate which is now 0
 			{
-				if (inOut == "Inne")			// Om det står "Inne" på inOut raden
+				if (inOut == "Inne")			// If it says "Inne" in the inOut field in the file
 				{
 
-					i.temp += stod(temperature);	// Plussa ihop alla inne-temperaturer och gör om string temperature till en double
-					i.fukt += stod(humidity);		// Plussa ihop alla inne-fuktvärden och gör om string humidity till en int
-					inCount++;					// Starta en räknare för inne
+					i.temp += stod(temperature);	// Sum of all temperatures, convert string temperature to double.
+					i.hum += stod(humidity);		// Sum of all humidity, convert string humidity to double.
+					inCount++;						// Start counter for inside.
 
 				}
-				else if (inOut == "Ute")		// Gör likadant med alla "Ute" värden och spara dom i u varibeln
+				else if (inOut == "Ute")		// Do the same for all outside values and save them in the u variable.
 				{
 
 
 					u.temp += stod(temperature);
-					u.fukt += stod(humidity);
+					u.hum += stod(humidity);								
 					outCount++;
 
 				}
@@ -234,39 +234,27 @@ int main()
 				if (count != 0)
 				{
 
-					i.temp = round((i.temp / inCount) * 10) / 10;
-					i.fukt = round((i.fukt / inCount) * 10) / 10;
+					i.temp = round((i.temp / inCount) * 10) / 10;		// Calculating average temperature of all values indoors
+					i.hum = round((i.hum / inCount) * 10) / 10;			// Calculating average temperature of all values outdoors
 
-					i.dag = currentDate;
-					i.inUt = "Inne";
+					i.day = currentDate;
+					i.inOut = "Inne";
 
-					dvIn.push_back(i);
+					dvIn.push_back(i);									// Push all values into the dvIn vector
 
-					u.temp = round((u.temp / outCount) * 10) / 10;
-					u.fukt = round((u.fukt / outCount) * 10) / 10;
-					u.dag = currentDate;
-					u.inUt = "Ute";
+					u.temp = round((u.temp / outCount) * 10) / 10;		// Calculating average temperature of all values outdoors
+					u.hum = round((u.hum / outCount) * 10) / 10;		// Calculating average humidity of all values outdoors
+					u.day = currentDate;
+					u.inOut = "Ute";
 
 
-					dvOut.push_back(u);
+					dvOut.push_back(u);				// Push all values into the dvOut vector
 
-					inCount = 0;
+					inCount = 0;			// Set all values to 0 after each day
 					outCount = 0;
 					checkDate = day;
 					u.temp = 0;
 					i.temp = 0;
-
-					// dela in i ute och inne, pushback till inne eller ute beroende på värdet av inOut.
-
-
-
-						// cout << currentDate << " " << d.medelF << " " << d.medelT << " " <<  inOut << endl;
-
-
-
-						// Separera inne och ute, gör en variabel för inne och ute var? Jag vill bara sortera temperaturer separat från varann. 
-
-						// sortera medeltemperaturen från max till min och skriv sedan ut 5 värden med bubblesort
 
 
 
@@ -282,8 +270,8 @@ int main()
 		int select;
 		string search;
 
-		while (true)
-		{
+		// Create a menu using switch: case, call the appropriate function for every choice.
+
 			cout << "\n Menu";
 
 			cout << "\n========";
@@ -321,9 +309,9 @@ int main()
 					cin >> search;
 					for (int i = 0; i < n; i++)
 					{
-						if (dvIn[i].dag == search)
+						if (dvIn[i].day == search)
 						{
-							cout << dvIn[i].dag << " " << dvIn[i].temp << "  " << dvIn[i].inUt << endl;
+							cout << dvIn[i].day << " " << dvIn[i].temp << "  " << dvIn[i].inOut << endl;
 						}
 					}
 				}
@@ -333,9 +321,9 @@ int main()
 					cin >> search;
 					for (int i = 0; i < n; i++)
 					{
-						if (dvOut[i].dag == search)
+						if (dvOut[i].day == search)
 						{
-							cout << dvOut[i].dag << " " << dvOut[i].temp << " " << dvOut[i].inUt << endl;
+							cout << dvOut[i].day << " " << dvOut[i].temp << " " << dvOut[i].inOut << endl;
 						}
 					}
 				}
@@ -439,5 +427,5 @@ int main()
 			getline(cin, y);
 			return 0;
 		}
-	}
+	
 }

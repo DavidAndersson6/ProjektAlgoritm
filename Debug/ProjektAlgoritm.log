@@ -1,6 +1,6 @@
 ﻿  ProjektAlgoritm.cpp
-C:\Users\david\source\repos\ProjektAlgoritm\ProjektAlgoritm.cpp(209,30): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\david\source\repos\ProjektAlgoritm\ProjektAlgoritm.cpp(218,30): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\david\source\repos\ProjektAlgoritm\ProjektAlgoritm.cpp(235,46): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\david\source\repos\ProjektAlgoritm\ProjektAlgoritm.cpp(243,47): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\david\source\repos\ProjektAlgoritm\ProjektAlgoritm.cpp(212,29): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\david\source\repos\ProjektAlgoritm\ProjektAlgoritm.cpp(221,29): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\david\source\repos\ProjektAlgoritm\ProjektAlgoritm.cpp(238,44): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\david\source\repos\ProjektAlgoritm\ProjektAlgoritm.cpp(246,45): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
   ProjektAlgoritm.vcxproj -> C:\Users\david\source\repos\ProjektAlgoritm\Debug\ProjektAlgoritm.exe
